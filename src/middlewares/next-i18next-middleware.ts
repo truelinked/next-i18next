@@ -87,6 +87,8 @@ export default function (nexti18next) {
           req.url = removeSubpath(req.url, subpath)
         }
       }
+
+      req.url = removeSubpath(req.url, currentLngSubpath);
     }
 
     next()

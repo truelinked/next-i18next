@@ -15,15 +15,33 @@ const Homepage = ({ t }) => (
           type='button'
           onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'de' : 'en')}
         >
-          {t('change-locale')}
+          change-locale
         </button>
         <Link href='/second-page'>
           <button
             type='button'
           >
-            {t('to-second-page')}
+            to-second-page
           </button>
         </Link>
+
+        <Link href='/employees'>
+          <button
+            type='button'
+          >
+            employees
+          </button>
+        </Link>
+        <Link as="/employees/[id]" href='/employees/123456'>
+          <button
+              type='button'
+          >
+            employees / 123456
+          </button>
+        </Link>
+        <div>
+          {i18n.language}
+        </div>
       </div>
     </main>
     <Footer />
@@ -31,11 +49,11 @@ const Homepage = ({ t }) => (
 )
 
 Homepage.getInitialProps = async () => ({
-  namespacesRequired: ['common', 'footer'],
+  namespacesRequired: ['translation'],
 })
 
 Homepage.propTypes = {
   t: PropTypes.func.isRequired,
 }
 
-export default withTranslation('common')(Homepage)
+export default withTranslation('translation')(Homepage)

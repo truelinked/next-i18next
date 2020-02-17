@@ -16,6 +16,7 @@
     "express": "^4.16.4",
     "i18next": "^14.0.1",
     "next": "^9.1.6",
-    "next-i18next": "link:../../"
+    "next-i18next": "link:../../",
+    "colors":"^1.4.0"
   }
 }

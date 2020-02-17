@@ -23,11 +23,11 @@ const SecondPage = ({ t }) => (
 )
 
 SecondPage.getInitialProps = async () => ({
-  namespacesRequired: ['second-page', 'footer'],
+  namespacesRequired: ['translation'],
 })
 
 SecondPage.propTypes = {
   t: PropTypes.func.isRequired,
 }
 
-export default withTranslation('second-page')(SecondPage)
+export default withTranslation('translation')(SecondPage)

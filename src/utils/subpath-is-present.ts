@@ -5,9 +5,20 @@ export const subpathIsPresent = (url: string, subpath: string) => {
     return false
   }
 
-  const { pathname } = parseUrl(url)
-  return typeof pathname === 'string' && (
-    (pathname.length === subpath.length + 1 && pathname === `/${subpath}`) ||
-    (pathname.startsWith(`/${subpath}/`))
-  )
+  const { pathname } = parseUrl(url);
+  const indexOfQueryParams = pathname.lastIndexOf('?');
+  let urlWithOutQueryParams = '';
+
+  if (indexOfQueryParams !== -1) {
+      urlWithOutQueryParams = pathname.substr(0, indexOfQueryParams);
+  }
+
+  const isPresent = typeof pathname === 'string' && (
+      (pathname.length === subpath.length + 1 && pathname === `/${subpath}`) ||
+      pathname.endsWith(`/${subpath}`) ||
+      urlWithOutQueryParams.endsWith(`/${subpath}`)
+  );
+
+
+    return isPresent;
 }

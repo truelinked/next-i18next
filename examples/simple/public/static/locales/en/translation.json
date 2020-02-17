@@ -1,0 +1,11 @@
+{
+  "h1": "A second page, to demonstrate routing",
+  "back-to-home": "Back to home",
+  "description": "This is a non-page component that requires its own namespace",
+  "h11": "A simple example",
+  "change-locale": "Change locale",
+  "to-second-page": "To second page",
+  "error-with-status": "A {{statusCode}} error occurred on server",
+  "error-without-status": "An error occurred on the server",
+  "text": "EN: simple example"
+}
