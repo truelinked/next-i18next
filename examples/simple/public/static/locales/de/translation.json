@@ -1,0 +1,11 @@
+{
+  "h1": "Ein einfaches Beispiel",
+  "change-locale": "Wechseln Locale",
+  "to-second-page": "Zur zweiten Seite",
+  "error-with-status": "Auf dem Server ist ein Fehler ({{statusCode}}) aufgetreten",
+  "error-without-status": "Auf dem Server ist ein Fehler aufgetreten",
+  "h11": "Eine zweite Seite, um das Routing zu demonstrieren",
+  "back-to-home": "Zurück zur Hauptseite",
+  "description": "Dies ist eine Nicht-Seitenkomponente, die einen eigenen Namespace erfordert",
+  "text": "DE: Zurück zur Hauptseite"
+}

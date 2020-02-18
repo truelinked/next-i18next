@@ -4,15 +4,11 @@ import PropTypes from 'prop-types'
 import { withTranslation } from '../i18n'
 
 const Error = ({ statusCode, t }) => (
-  <div>
-    Error page
-    <hr/>
-    <p>
-      {statusCode
+  <p>
+    {statusCode
       ? t('error-with-status', { statusCode })
       : t('error-without-status')}
-    </p>
-  </div>
+  </p>
 )
 
 Error.getInitialProps = async ({ res, err }) => {
@@ -23,7 +19,7 @@ Error.getInitialProps = async ({ res, err }) => {
     ({ statusCode } = err)
   }
   return {
-    namespacesRequired: ['translation'],
+    namespacesRequired: ['common'],
     statusCode,
   }
 }
@@ -37,4 +33,4 @@ Error.propTypes = {
   t: PropTypes.func.isRequired,
 }
 
-export default withTranslation('translation')(Error)
+export default withTranslation('common')(Error)

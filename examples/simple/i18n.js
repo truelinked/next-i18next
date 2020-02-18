@@ -4,20 +4,21 @@
 */
 
 const NextI18Next = require('next-i18next').default
-const { localeSubpaths } = require('next/config').default().publicRuntimeConfig
 
-const localeSubpathVariations = {
-  none: {},
-  foreign: {
-    de: 'de',
-  },
-  all: {
+const options = {
+  browserLanguageDetection: true,
+  defaultNS: 'translation',
+  defaultLanguage: 'en',
+  otherLanguages: ['de', 'es'],
+  localePath: "public/static/locales",
+  // localeSubpaths: localeSubpathVariations[localeSubpaths],
+  localeSubpaths: {
     en: 'en',
     de: 'de',
+    es: 'es'
   },
-}
+  keySeparator: "/", // to allow use keyes from oneSky like "some.some1.name"
+};
 
-module.exports = new NextI18Next({
-  otherLanguages: ['de'],
-  localeSubpaths: localeSubpathVariations[localeSubpaths],
-})
+module.exports = new NextI18Next(options);
+

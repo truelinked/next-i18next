@@ -21,4 +21,4 @@ Footer.propTypes = {
   t: PropTypes.func.isRequired,
 }
 
-export default withTranslation('translation')(Footer)
+export default withTranslation('footer')(Footer)
