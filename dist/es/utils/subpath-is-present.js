@@ -7,5 +7,5 @@ export const subpathIsPresent = (url, subpath) => {
   const {
     pathname
   } = parseUrl(url);
-  return typeof pathname === 'string' && (pathname.length === subpath.length + 1 && pathname === `/${subpath}` || pathname.startsWith(`/${subpath}/`));
+  return typeof pathname === 'string' && (pathname.length === subpath.length + 1 && pathname === `/${subpath}` || pathname.endsWith(`/${subpath}/`) || pathname.endsWith(`/${subpath}`));
 };

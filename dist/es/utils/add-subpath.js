@@ -1,1 +1,1 @@
-export const addSubpath = (url, subpath) => url.replace('/', `/${subpath}/`).replace(/(https?:\/\/)|(\/)+/g, "$1$2").replace(/\/$/, '');
+export const addSubpath = (url, subpath) => url.concat(`/${subpath}/`).replace(/(https?:\/\/)|(\/)+/g, "$1$2").replace(/\/$/, '');
