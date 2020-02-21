@@ -71,7 +71,7 @@ export const lngPathCorrector = (config: Config, currentRoute, currentLanguage) 
     const currentAs = as.replace(basePath, '')
     const subpath = subpathFromLng(config, currentLanguage)
 
-    as = `/${subpath}${currentAs}`.replace(/\/$/, '')
+    as = `/${currentAs}${subpath}`.replace(/\/$/, '')
     href.query.lng = currentLanguage
     href.query.subpath = subpath
   }
