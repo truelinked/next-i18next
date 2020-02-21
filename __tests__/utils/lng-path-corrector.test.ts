@@ -43,7 +43,7 @@ describe('lngPathCorrector utility function', () => {
     const runTests = () => {
       config.localeSubpaths = localeSubpathVariations.FOREIGN
       const result = lngPathCorrector(config, currentRoute, 'de')
-      expect(result.as).toEqual('/german/foo')
+      expect(result.as).toEqual('/foo/german')
       expect(result.href)
         .toEqual(expect.objectContaining({
           pathname: '/foo',
@@ -69,7 +69,7 @@ describe('lngPathCorrector utility function', () => {
     const runTests = () => {
       config.localeSubpaths = localeSubpathVariations.ALL
       const result = lngPathCorrector(config, currentRoute, 'de')
-      expect(result.as).toEqual('/german/foo?option1=value1')
+      expect(result.as).toEqual('/foo/german?option1=value1')
       expect(result.href).toEqual(expect.objectContaining({
         pathname: '/foo',
         query: {
@@ -95,7 +95,7 @@ describe('lngPathCorrector utility function', () => {
     const runTests = () => {
       config.localeSubpaths = localeSubpathVariations.ALL
       const result = lngPathCorrector(config, currentRoute, 'de')
-      expect(result.as).toEqual('/german/foo#hash1')
+      expect(result.as).toEqual('/foo/german#hash1')
       expect(result.href).toEqual(expect.objectContaining({
         pathname: '/foo',
         hash: '#hash1',
@@ -184,7 +184,7 @@ describe('lngPathCorrector utility function', () => {
 
   describe('using as', () => {
     it('does not remove default language from as when localeSubpath is provided', () => {
-      currentRoute.as = '/english/foo'
+      currentRoute.as = '/foo/english'
       currentRoute.href = '/somewhere/else?option1=value1#hash1'
       config.localeSubpaths = localeSubpathVariations.ALL
 
@@ -208,7 +208,7 @@ describe('lngPathCorrector utility function', () => {
       config.localeSubpaths = localeSubpathVariations.ALL
 
       const result = lngPathCorrector(config, currentRoute, 'de')
-      expect(result.as).toEqual('/german/foo')
+      expect(result.as).toEqual('/foo/german')
       expect(result.href).toEqual(expect.objectContaining({
         pathname: '/somewhere/else',
         hash: '#hash1',

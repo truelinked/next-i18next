@@ -41,20 +41,52 @@ describe('subpathIsPresent utility function', () => {
     expect(subpathIsPresent('/product?german', subpath)).toBe(false)
   })
 
+  it('returns false if basic url contains subpath at the begin', () => {
+    expect(subpathIsPresent('/german/product', subpath)).toBe(false)
+  })
+
   it('returns true if basic url contains subpath', () => {
-    expect(subpathIsPresent('/german/product', subpath)).toBe(true)
+    expect(subpathIsPresent('/product/german', subpath)).toBe(true)
+  })
+
+  it('returns true if basic url contains subpath ends with /', () => {
+    expect(subpathIsPresent('/product/german/', subpath)).toBe(true)
+  })
+
+  it('returns false if complex url contains subpath at the begin', () => {
+    expect(subpathIsPresent('/german/product/ab3sf3c', subpath)).toBe(false)
   })
 
   it('returns true if complex url contains subpath', () => {
-    expect(subpathIsPresent('/german/product/ab3sf3c', subpath)).toBe(true)
+    expect(subpathIsPresent('/product/ab3sf3c/german', subpath)).toBe(true)
+  })
+
+  it('returns true if complex url contains subpath ends with /', () => {
+    expect(subpathIsPresent('/product/ab3sf3c/german/', subpath)).toBe(true)
+  })
+
+  it('returns false if basic url with query string contains subpath at the begin', () => {
+    expect(subpathIsPresent('/german/product?hello=world', subpath)).toBe(false)
   })
 
   it('returns true if basic url with query string contains subpath', () => {
-    expect(subpathIsPresent('/german/product?hello=world', subpath)).toBe(true)
+    expect(subpathIsPresent('/product/german?hello=world', subpath)).toBe(true)
+  })
+
+  it('returns true if basic url with query string contains subpath ends with /', () => {
+    expect(subpathIsPresent('/product/german/?hello=world', subpath)).toBe(true)
+  })
+
+  it('returns false if complex url with query string contains subpath at the begin', () => {
+    expect(subpathIsPresent('/german/product/ab3sf3c?hello=world', subpath)).toBe(false)
   })
 
   it('returns true if complex url with query string contains subpath', () => {
-    expect(subpathIsPresent('/german/product/ab3sf3c?hello=world', subpath)).toBe(true)
+    expect(subpathIsPresent('/product/ab3sf3c/german?hello=world', subpath)).toBe(true)
+  })
+
+  it('returns true if complex url with query string contains subpath', () => {
+    expect(subpathIsPresent('/product/ab3sf3c/german/?hello=world', subpath)).toBe(true)
   })
 
 })

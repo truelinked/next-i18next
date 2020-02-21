@@ -1,1 +1,10 @@
-export const removeSubpath = (url, subpath) => url.replace("/".concat(subpath), '').replace(/(https?:\/\/)|(\/)+/g, "$1$2");
+import { format, parse } from 'url';
+export const removeSubpath = (url, subpath) => {
+  const parsedURL = parse(url);
+  const regExp = new RegExp("(\/" + subpath + ")(\/)?$", "igm");
+  const fixedPathname = parsedURL.pathname.replace(regExp, "$2");
+  const fixedURL = { ...parsedURL,
+    pathname: fixedPathname
+  };
+  return format(fixedURL);
+};

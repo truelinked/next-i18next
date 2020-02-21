@@ -100,7 +100,7 @@ describe('Link component', () => {
         }
       }),
     )
-    expect(component.prop('as')).toEqual('/german/foo/bar')
+    expect(component.prop('as')).toEqual('/foo/bar/german')
 
     // without 'as' prop -- query parameters
     props.href = '/foo/bar?baz'
@@ -154,7 +154,7 @@ describe('Link component', () => {
         }
       }),
     )
-    expect(component.prop('as')).toEqual('/german/foo/bar?baz')
+    expect(component.prop('as')).toEqual('/foo/bar/german?baz')
   })
 
   describe('https://github.com/isaachinman/next-i18next/issues/89', () => {
@@ -209,7 +209,7 @@ describe('Link component', () => {
               subpath: 'german',
             }
           })
-          expect(component.prop('as')).toEqual('/german/foo/bar')
+          expect(component.prop('as')).toEqual('/foo/bar/german')
         })
 
         it('renders with lang (with "as" prop)', () => {
@@ -224,7 +224,7 @@ describe('Link component', () => {
               subpath: 'german',
             }
           })
-          expect(component.prop('as')).toEqual('/german/foo?bar')
+          expect(component.prop('as')).toEqual('/foo/german?bar')
         })
 
         it('renders with lang (with query parameters)', () => {
@@ -241,7 +241,7 @@ describe('Link component', () => {
                 subpath: 'german',
               }
             })
-          expect(component.prop('as')).toEqual('/german/foo/bar?baz=')
+          expect(component.prop('as')).toEqual('/foo/bar/german?baz=')
         })
       })
     })

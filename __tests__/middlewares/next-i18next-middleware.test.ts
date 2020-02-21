@@ -80,7 +80,7 @@ describe('next-18next middleware', () => {
       const language = 'de'
       const subpath = 'german'
       req = {
-        url: `/${subpath}/page1`,
+        url: `/page1/${subpath}`,
         query: {},
         i18n: {
           ...testI18NextConfig,
@@ -128,7 +128,7 @@ describe('next-18next middleware', () => {
       expect(req.url).toBe('/page1')
       expect(req.query).toEqual({})
 
-      expect(res.redirect).toHaveBeenCalledWith(302, '/german/page1')
+      expect(res.redirect).toHaveBeenCalledWith(302, '/page1/german')
       expect(res.header).toHaveBeenNthCalledWith(1, 'Cache-Control', 'private, no-cache, no-store, must-revalidate')
       expect(res.header).toHaveBeenNthCalledWith(2, 'Expires', '-1')
       expect(res.header).toHaveBeenNthCalledWith(3, 'Pragma', 'no-cache')
