@@ -117,7 +117,7 @@ var lngPathCorrector = function lngPathCorrector(config, currentRoute, currentLa
     var basePath = "".concat(href.protocol, "//").concat(href.host);
     var currentAs = as.replace(basePath, '');
     var subpath = (0, _index.subpathFromLng)(config, currentLanguage);
-    as = "/".concat(subpath).concat(currentAs).replace(/\/$/, '');
+    as = "/".concat(currentAs).concat(subpath).replace(/\/$/, '');
     href.query.lng = currentLanguage;
     href.query.subpath = subpath;
   }
