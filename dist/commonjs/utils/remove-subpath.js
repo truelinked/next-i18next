@@ -44,6 +44,10 @@ var removeSubpath = function removeSubpath(url, subpath) {
   var regExp = new RegExp("(\/" + subpath + ")(\/)?$", "igm");
   var fixedPathname = parsedURL.pathname.replace(regExp, "$2");
 
+  if (fixedPathname.length === 0) {
+    fixedPathname = '/';
+  }
+
   var fixedURL = _objectSpread({}, parsedURL, {
     pathname: fixedPathname
   });
