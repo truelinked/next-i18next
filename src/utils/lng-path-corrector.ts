@@ -68,13 +68,16 @@ export const lngPathCorrector = (config: Config, currentRoute, currentLanguage) 
 
   if (subpathIsRequired(config, currentLanguage)) {
     const basePath = `${href.protocol}//${href.host}`
-    const pathname = href.pathname.replace(/^\//, '').replace(/\/$/, '')
+    let pathname = href.pathname.replace(/^\//, '').replace(/\/$/, '')
+    if (pathname.length > 0) {
+      pathname = pathname.concat("/")
+    }
     const currentAs = as.replace(basePath, '')
     const subpath = subpathFromLng(config, currentLanguage)
     const search = typeof href.query === "string" ? href.query : ''
     const hash = typeof href.hash === "string"  ? href.hash : ''
 
-    as = `/${pathname}/${subpath}${search}${hash}`
+    as = `/${pathname}${subpath}${search}${hash}`
     href.query.lng = currentLanguage
     href.query.subpath = subpath
   }
