@@ -115,17 +115,13 @@ var lngPathCorrector = function lngPathCorrector(config, currentRoute, currentLa
 
   if ((0, _index.subpathIsRequired)(config, currentLanguage)) {
     var basePath = "".concat(href.protocol, "//").concat(href.host);
-    var pathname = href.pathname.replace(/^\//, '').replace(/\/$/, '');
-
-    if (pathname.length > 0) {
-      pathname = pathname.concat("/");
-    }
-
     var currentAs = as.replace(basePath, '');
+    var parsedAs = (0, _url.parse)(currentAs);
     var subpath = (0, _index.subpathFromLng)(config, currentLanguage);
-    var search = typeof href.query === "string" ? href.query : '';
-    var hash = typeof href.hash === "string" ? href.hash : '';
-    as = "/".concat(pathname).concat(subpath).concat(search).concat(hash);
+    var pathname = parsedAs.pathname.length > 0 ? parsedAs.pathname.replace(/\/$/, '') : '/';
+    var search = typeof parsedAs.search === "string" ? parsedAs.search : '';
+    var hash = typeof parsedAs.hash === "string" ? parsedAs.hash : '';
+    as = "".concat(pathname, "/").concat(subpath).concat(search).concat(hash);
     href.query.lng = currentLanguage;
     href.query.subpath = subpath;
   }

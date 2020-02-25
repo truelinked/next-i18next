@@ -116,7 +116,7 @@ describe('Link component', () => {
         }
       }),
     )
-    expect(component.prop('as')).toEqual('/german/foo/bar?baz')
+    expect(component.prop('as')).toEqual('/foo/bar/german?baz')
 
     props.href = '/foo/bar'
 
@@ -133,7 +133,7 @@ describe('Link component', () => {
         }
       }),
     )
-    expect(component.prop('as')).toEqual('/german/foo?bar')
+    expect(component.prop('as')).toEqual('/foo/german?bar')
   })
 
   it('handles full URLs', () => {

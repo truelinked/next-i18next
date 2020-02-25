@@ -189,7 +189,7 @@ describe('lngPathCorrector utility function', () => {
       config.localeSubpaths = localeSubpathVariations.ALL
 
       const result = lngPathCorrector(config, currentRoute, 'en')
-      expect(result.as).toEqual('/english/foo')
+      expect(result.as).toEqual('/foo/english')
       expect(result.href).toEqual(expect.objectContaining({
         pathname: '/somewhere/else',
         hash: '#hash1',
