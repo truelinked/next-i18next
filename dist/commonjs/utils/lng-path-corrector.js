@@ -123,7 +123,10 @@ var lngPathCorrector = function lngPathCorrector(config, currentRoute, currentLa
     var hash = typeof parsedAs.hash === "string" ? parsedAs.hash : '';
     as = "".concat(pathname, "/").concat(subpath).concat(search).concat(hash); // @TODO I have to change pathname due to the unfixed error https://github.com/isaachinman/next-i18next/issues/413
 
-    href.pathname = href.pathname.replace(/\/$/, '').concat("/[subpath]");
+    if (originalAs) {
+      href.pathname = href.pathname.replace(/\/$/, '').concat("/[subpath]");
+    }
+
     href.query.lng = currentLanguage;
     href.query.subpath = subpath;
   }
