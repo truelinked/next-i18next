@@ -71,7 +71,7 @@ export const lngPathCorrector = (config: Config, currentRoute, currentLanguage) 
     const currentAs = as.replace(basePath, '')
     const parsedAs = parseUrl(currentAs)
     const subpath = subpathFromLng(config, currentLanguage)
-    const pathname = parsedAs.pathname.length > 0 ? parsedAs.pathname.replace(/\/$/, '') : '/'
+    const pathname = typeof parsedAs.pathname === "string" && parsedAs.pathname.length > 0 ? parsedAs.pathname.replace(/\/$/, '') : '/'
     const search = typeof parsedAs.search === "string" ? parsedAs.search : ''
     const hash = typeof parsedAs.hash === "string"  ? parsedAs.hash : ''
 

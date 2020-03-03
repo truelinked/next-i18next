@@ -118,7 +118,7 @@ var lngPathCorrector = function lngPathCorrector(config, currentRoute, currentLa
     var currentAs = as.replace(basePath, '');
     var parsedAs = (0, _url.parse)(currentAs);
     var subpath = (0, _index.subpathFromLng)(config, currentLanguage);
-    var pathname = parsedAs.pathname.length > 0 ? parsedAs.pathname.replace(/\/$/, '') : '/';
+    var pathname = typeof parsedAs.pathname === "string" && parsedAs.pathname.length > 0 ? parsedAs.pathname.replace(/\/$/, '') : '/';
     var search = typeof parsedAs.search === "string" ? parsedAs.search : '';
     var hash = typeof parsedAs.hash === "string" ? parsedAs.hash : '';
     as = "".concat(pathname, "/").concat(subpath).concat(search).concat(hash); // @TODO I have to change pathname due to the unfixed error https://github.com/isaachinman/next-i18next/issues/413
