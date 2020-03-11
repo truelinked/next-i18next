@@ -19,7 +19,7 @@ export default function (nexti18next) {
   const { allLanguages, ignoreRoutes, localeSubpaths } = config
 
   const isI18nRoute = (req: Request) => ignoreRoutes.every(x => !req.url.startsWith(x))
-  const localeSubpathRoute = route(`(.*)?/:subpath(${Object.values(localeSubpaths).join('|')})`)
+  const localeSubpathRoute = route(`(.*)?/:subpath(${Object.values(localeSubpaths).join('|')})([?#](.*))?`)
 
   const middleware = []
 
