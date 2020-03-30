@@ -62,7 +62,7 @@ function _default(nexti18next) {
     });
   };
 
-  var localeSubpathRoute = route("(.*)?/:subpath(".concat(Object.values(localeSubpaths).join('|'), ")([?#](.*))?"));
+  var localeSubpathRoute = route("(.*)?/:subpath(".concat(Object.values(localeSubpaths).join('|'), ")([?#].*)?"));
   var middleware = [];
   /*
     If not using server side language detection,
