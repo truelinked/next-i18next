@@ -76,8 +76,9 @@ export const lngPathCorrector = (config: Config, currentRoute, currentLanguage) 
     const hash = typeof parsedAs.hash === "string"  ? parsedAs.hash : ''
 
     as = `${pathname}/${subpath}${search}${hash}`
+    const query = href.query
     // @TODO I have to change pathname due to the unfixed error https://github.com/isaachinman/next-i18next/issues/413
-    if (originalAs) {
+    if (!query.id && originalAs) {
       href.pathname = href.pathname.replace(/\/$/, '').concat("/[subpath]")
     }
     href.query.lng = currentLanguage
