@@ -2,22 +2,14 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
+require("core-js/modules/es6.object.define-property");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.appWithTranslation = void 0;
 
-require("core-js/modules/es6.object.define-property");
-
-require("core-js/modules/es6.object.define-properties");
-
-require("core-js/modules/es7.object.get-own-property-descriptors");
-
-require("core-js/modules/es6.symbol");
-
-require("core-js/modules/es6.object.keys");
-
-var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
 require("core-js/modules/es6.date.to-json");
 
@@ -80,12 +72,6 @@ var _reactI18next = require("react-i18next");
 var _utils = require("../utils");
 
 var _components = require("../components");
-
-var __jsx = _react["default"].createElement;
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var appWithTranslation = function appWithTranslation(WrappedComponent) {
   var WrappedComponentWithSSR = (0, _reactI18next.withSSR)()(WrappedComponent);
@@ -201,9 +187,9 @@ var appWithTranslation = function appWithTranslation(WrappedComponent) {
             initialLanguage = _this$props.initialLanguage,
             initialI18nStore = _this$props.initialI18nStore,
             i18nServerInstance = _this$props.i18nServerInstance;
-        return __jsx(_reactI18next.I18nextProvider, {
+        return _react["default"].createElement(_reactI18next.I18nextProvider, {
           i18n: i18nServerInstance || i18n
-        }, __jsx(_components.NextStaticProvider, null, __jsx(WrappedComponentWithSSR, (0, _extends2["default"])({
+        }, _react["default"].createElement(_components.NextStaticProvider, null, _react["default"].createElement(WrappedComponentWithSSR, (0, _extends2["default"])({
           initialLanguage: initialLanguage,
           initialI18nStore: initialI18nStore
         }, this.props))));
@@ -352,7 +338,7 @@ var appWithTranslation = function appWithTranslation(WrappedComponent) {
                   */
 
 
-                  return _context2.abrupt("return", _objectSpread({
+                  return _context2.abrupt("return", (0, _objectSpread2["default"])({
                     initialI18nStore: initialI18nStore,
                     initialLanguage: initialLanguage,
                     i18nServerInstance: i18nServerInstance
@@ -366,11 +352,9 @@ var appWithTranslation = function appWithTranslation(WrappedComponent) {
           }, _callee2);
         }));
 
-        function getInitialProps(_x2) {
+        return function getInitialProps(_x2) {
           return _getInitialProps.apply(this, arguments);
-        }
-
-        return getInitialProps;
+        };
       }()
     }]);
     return AppWithTranslation;

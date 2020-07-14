@@ -79,9 +79,10 @@ export const lngPathCorrector = (config, currentRoute, currentLanguage) => {
     const pathname = typeof parsedAs.pathname === "string" && parsedAs.pathname.length > 0 ? parsedAs.pathname.replace(/\/$/, '') : '/';
     const search = typeof parsedAs.search === "string" ? parsedAs.search : '';
     const hash = typeof parsedAs.hash === "string" ? parsedAs.hash : '';
-    as = `${pathname}/${subpath}${search}${hash}`; // @TODO I have to change pathname due to the unfixed error https://github.com/isaachinman/next-i18next/issues/413
+    as = `${pathname}/${subpath}${search}${hash}`;
+    const query = href.query; // @TODO I have to change pathname due to the unfixed error https://github.com/isaachinman/next-i18next/issues/413
 
-    if (originalAs) {
+    if (!query.id && originalAs) {
       href.pathname = href.pathname.replace(/\/$/, '').concat("/[subpath]");
     }
 

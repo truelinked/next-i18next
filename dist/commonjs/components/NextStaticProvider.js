@@ -60,5 +60,3 @@ function (_React$Component) {
 var _default = (0, _reactI18next.withTranslation)()(NextStaticProvider);
 
 exports["default"] = _default;
-module.exports = exports.default;
-module.exports.default = exports.default;

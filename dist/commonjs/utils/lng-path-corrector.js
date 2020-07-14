@@ -2,22 +2,12 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
+require("core-js/modules/es6.object.define-property");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.lngPathCorrector = void 0;
-
-require("core-js/modules/es6.object.define-property");
-
-require("core-js/modules/es6.object.define-properties");
-
-require("core-js/modules/es7.object.get-own-property-descriptors");
-
-require("core-js/modules/es6.array.filter");
-
-require("core-js/modules/es6.symbol");
-
-require("core-js/modules/es6.object.keys");
 
 require("core-js/modules/es6.regexp.replace");
 
@@ -37,17 +27,13 @@ require("core-js/modules/es7.array.includes");
 
 require("core-js/modules/es6.string.includes");
 
-var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 var _url = require("url");
 
 var _index = require("./index");
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var parseAs = function parseAs(originalAs, href) {
   var asType = (0, _typeof2["default"])(originalAs);
@@ -75,8 +61,8 @@ var parseHref = function parseHref(originalHref) {
     /* parseQueryString */
     );
   } else if (hrefType === 'object') {
-    href = _objectSpread({}, originalHref);
-    href.query = originalHref.query ? _objectSpread({}, originalHref.query) : {};
+    href = (0, _objectSpread2["default"])({}, originalHref);
+    href.query = originalHref.query ? (0, _objectSpread2["default"])({}, originalHref.query) : {};
   } else {
     throw new Error("'href' type must be either 'string' or 'object', but it is ".concat(hrefType));
   }
@@ -121,9 +107,10 @@ var lngPathCorrector = function lngPathCorrector(config, currentRoute, currentLa
     var pathname = typeof parsedAs.pathname === "string" && parsedAs.pathname.length > 0 ? parsedAs.pathname.replace(/\/$/, '') : '/';
     var search = typeof parsedAs.search === "string" ? parsedAs.search : '';
     var hash = typeof parsedAs.hash === "string" ? parsedAs.hash : '';
-    as = "".concat(pathname, "/").concat(subpath).concat(search).concat(hash); // @TODO I have to change pathname due to the unfixed error https://github.com/isaachinman/next-i18next/issues/413
+    as = "".concat(pathname, "/").concat(subpath).concat(search).concat(hash);
+    var query = href.query; // @TODO I have to change pathname due to the unfixed error https://github.com/isaachinman/next-i18next/issues/413
 
-    if (originalAs) {
+    if (!query.id && originalAs) {
       href.pathname = href.pathname.replace(/\/$/, '').concat("/[subpath]");
     }
 

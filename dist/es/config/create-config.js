@@ -71,11 +71,11 @@ export const createConfig = userConfig => {
     combinedConfig.backend = {
       loadPath: path.join(process.cwd(), `${serverLocalePath}/${localeStructure}.${localeExtension}`),
       addPath: path.join(process.cwd(), `${serverLocalePath}/${localeStructure}.missing.${localeExtension}`)
-    };
-    /*
-      Set server side preload (languages and namespaces)
-    */
+      /*
+        Set server side preload (languages and namespaces)
+      */
 
+    };
     combinedConfig.preload = allLanguages;
 
     if (!combinedConfig.ns) {

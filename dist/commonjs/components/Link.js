@@ -37,8 +37,23 @@ var _reactI18next = require("react-i18next");
 
 var _utils = require("../utils");
 
-var __jsx = _react["default"].createElement;
+/*
+  This `Link` component is a wrap of the standard
+  NextJs `Link` component, with some simple lang
+  redirect logic in place.
 
+  If you haven't already, read this issue comment:
+  https://github.com/zeit/next.js/issues/2833#issuecomment-414919347
+
+  This component automatically provides this functionality:
+  <Link href="/product?slug=something" as="/products/something">
+
+  Wherein `slug` is actually our i18n lang, and it gets
+  pulled automatically.
+
+  Very important: if you import `Link` from NextJs directly,
+  and not this file, your lang subpath routing will break.
+*/
 var removeWithTranslationProps = function removeWithTranslationProps(props) {
   var strippedProps = Object.assign({}, props);
   delete strippedProps.defaultNS;
@@ -83,13 +98,13 @@ function (_React$Component) {
             correctedAs = _lngPathCorrector.as,
             correctedHref = _lngPathCorrector.href;
 
-        return __jsx(_link["default"], (0, _extends2["default"])({
+        return _react["default"].createElement(_link["default"], (0, _extends2["default"])({
           href: correctedHref,
           as: correctedAs
         }, removeWithTranslationProps(props)), children);
       }
 
-      return __jsx(_link["default"], (0, _extends2["default"])({
+      return _react["default"].createElement(_link["default"], (0, _extends2["default"])({
         href: href,
         as: as
       }, removeWithTranslationProps(props)), children);
@@ -121,5 +136,3 @@ function (_React$Component) {
 var _default = (0, _reactI18next.withTranslation)()(Link);
 
 exports["default"] = _default;
-module.exports = exports.default;
-module.exports.default = exports.default;

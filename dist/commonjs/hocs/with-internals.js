@@ -27,8 +27,6 @@ var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/de
 
 var _react = _interopRequireDefault(require("react"));
 
-var __jsx = _react["default"].createElement;
-
 var withInternals = function withInternals(WrappedComponent, config) {
   var WithInternals =
   /*#__PURE__*/
@@ -43,7 +41,7 @@ var withInternals = function withInternals(WrappedComponent, config) {
     (0, _createClass2["default"])(WithInternals, [{
       key: "render",
       value: function render() {
-        return __jsx(WrappedComponent, (0, _extends2["default"])({}, this.props, {
+        return _react["default"].createElement(WrappedComponent, (0, _extends2["default"])({}, this.props, {
           nextI18NextInternals: config
         }));
       }

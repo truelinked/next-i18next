@@ -2,26 +2,12 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
+require("core-js/modules/es6.object.define-property");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.createConfig = void 0;
-
-require("core-js/modules/es6.object.define-property");
-
-require("core-js/modules/es6.object.define-properties");
-
-require("core-js/modules/es7.object.get-own-property-descriptors");
-
-require("core-js/modules/es6.symbol");
-
-require("core-js/modules/web.dom.iterable");
-
-require("core-js/modules/es6.array.iterator");
-
-require("core-js/modules/es6.object.to-string");
-
-require("core-js/modules/es6.object.keys");
 
 require("core-js/modules/es6.array.for-each");
 
@@ -31,7 +17,7 @@ require("core-js/modules/es6.regexp.replace");
 
 require("core-js/modules/es6.array.map");
 
-var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
 require("core-js/modules/es6.array.index-of");
 
@@ -40,10 +26,6 @@ require("core-js/modules/es6.array.filter");
 var _defaultConfig = require("./default-config");
 
 var _utils = require("../utils");
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var deepMergeObjects = ['backend', 'detection'];
 
@@ -64,11 +46,10 @@ var createConfig = function createConfig(userConfig) {
   */
 
 
-  var combinedConfig = _objectSpread({}, _defaultConfig.defaultConfig, {}, userConfig);
+  var combinedConfig = (0, _objectSpread2["default"])({}, _defaultConfig.defaultConfig, userConfig);
   /*
     Sensible defaults to prevent user duplication
   */
-
 
   combinedConfig.allLanguages = dedupe(combinedConfig.otherLanguages.concat([combinedConfig.defaultLanguage]));
   combinedConfig.whitelist = combinedConfig.allLanguages;
@@ -118,11 +99,11 @@ var createConfig = function createConfig(userConfig) {
     combinedConfig.backend = {
       loadPath: path.join(process.cwd(), "".concat(serverLocalePath, "/").concat(localeStructure, ".").concat(localeExtension)),
       addPath: path.join(process.cwd(), "".concat(serverLocalePath, "/").concat(localeStructure, ".missing.").concat(localeExtension))
-    };
-    /*
-      Set server side preload (languages and namespaces)
-    */
+      /*
+        Set server side preload (languages and namespaces)
+      */
 
+    };
     combinedConfig.preload = allLanguages;
 
     if (!combinedConfig.ns) {
@@ -169,7 +150,7 @@ var createConfig = function createConfig(userConfig) {
 
   deepMergeObjects.forEach(function (obj) {
     if (userConfig[obj]) {
-      combinedConfig[obj] = _objectSpread({}, _defaultConfig.defaultConfig[obj], {}, userConfig[obj]);
+      combinedConfig[obj] = (0, _objectSpread2["default"])({}, _defaultConfig.defaultConfig[obj], userConfig[obj]);
     }
   });
   return combinedConfig;

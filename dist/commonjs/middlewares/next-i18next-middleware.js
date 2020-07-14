@@ -2,26 +2,14 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
+require("core-js/modules/es6.object.define-property");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = _default;
 
-require("core-js/modules/es6.object.define-property");
-
-require("core-js/modules/es6.object.define-properties");
-
-require("core-js/modules/es7.object.get-own-property-descriptors");
-
-require("core-js/modules/es6.array.for-each");
-
-require("core-js/modules/es6.array.filter");
-
-require("core-js/modules/es6.symbol");
-
-require("core-js/modules/es6.object.keys");
-
-var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
 require("core-js/modules/es6.array.find");
 
@@ -42,10 +30,6 @@ var _i18nextExpressMiddleware = _interopRequireDefault(require("i18next-express-
 var _pathMatch = _interopRequireDefault(require("path-match"));
 
 var _utils = require("../utils");
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var route = (0, _pathMatch["default"])();
 
@@ -126,7 +110,7 @@ function _default(nexti18next) {
 
         if (params !== false) {
           var subpath = params.subpath;
-          req.query = _objectSpread({}, req.query, {
+          req.query = (0, _objectSpread2["default"])({}, req.query, {
             subpath: subpath,
             lng: currentLng
           });
@@ -139,6 +123,3 @@ function _default(nexti18next) {
   });
   return middleware;
 }
-
-module.exports = exports.default;
-module.exports.default = exports.default;
