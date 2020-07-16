@@ -9,6 +9,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.lngPathCorrector = void 0;
 
+require("core-js/modules/es6.object.keys");
+
 require("core-js/modules/es6.regexp.replace");
 
 require("core-js/modules/web.dom.iterable");
@@ -27,6 +29,8 @@ require("core-js/modules/es7.array.includes");
 
 require("core-js/modules/es6.string.includes");
 
+require("core-js/modules/es6.regexp.split");
+
 var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
@@ -34,6 +38,8 @@ var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 var _url = require("url");
 
 var _index = require("./index");
+
+var _queryString = require("query-string");
 
 var parseAs = function parseAs(originalAs, href) {
   var asType = (0, _typeof2["default"])(originalAs);
@@ -68,6 +74,32 @@ var parseHref = function parseHref(originalHref) {
   }
 
   return href;
+};
+
+var getHref = function getHref(pathname, href, queryLength) {
+  if (typeof href.href === 'string') {
+    var pathList = href.href.split('/');
+    var asList = pathname.split('/');
+    var regex = /\[(.*?)\]/gm;
+    var obj = {};
+
+    for (var i = 0; i < pathList.length; i++) {
+      var match = regex.exec(pathList[i]);
+
+      if (match !== null) {
+        var key = match[1];
+        var val = asList[i];
+        obj[key] = val;
+        href.query[key] = val;
+        regex.lastIndex = 0;
+      }
+    }
+
+    var str = queryLength > 0 ? '&' : '?';
+    return "".concat(href.href).concat(str).concat((0, _queryString.stringify)(obj));
+  } else {
+    return href;
+  }
 };
 
 var lngPathCorrector = function lngPathCorrector(config, currentRoute, currentLanguage) {
@@ -107,11 +139,14 @@ var lngPathCorrector = function lngPathCorrector(config, currentRoute, currentLa
     var pathname = typeof parsedAs.pathname === "string" && parsedAs.pathname.length > 0 ? parsedAs.pathname.replace(/\/$/, '') : '/';
     var search = typeof parsedAs.search === "string" ? parsedAs.search : '';
     var hash = typeof parsedAs.hash === "string" ? parsedAs.hash : '';
-    as = "".concat(pathname, "/").concat(subpath).concat(search).concat(hash);
-    var query = href.query; // @TODO I have to change pathname due to the unfixed error https://github.com/isaachinman/next-i18next/issues/413
+    as = "".concat(pathname, "/").concat(subpath).concat(search).concat(hash); // @TODO I have to change pathname due to the unfixed error https://github.com/isaachinman/next-i18next/issues/413
 
-    if (!query.id && originalAs) {
-      href.pathname = href.pathname.replace(/\/$/, '').concat("/[subpath]");
+    var query = href.query;
+    var queryLength = Object.keys(query).length;
+
+    if (originalAs) {
+      var newHref = getHref(pathname, href, queryLength);
+      href.href = newHref;
     }
 
     href.query.lng = currentLanguage;

@@ -1,5 +1,6 @@
 import { format as formatUrl, parse as parseUrl } from 'url';
 import { removeSubpath, subpathIsPresent, subpathIsRequired, subpathFromLng } from './index';
+import { stringify } from 'query-string';
 
 const parseAs = (originalAs, href) => {
   const asType = typeof originalAs;
@@ -36,6 +37,32 @@ const parseHref = originalHref => {
   }
 
   return href;
+};
+
+const getHref = (pathname, href, queryLength) => {
+  if (typeof href.href === 'string') {
+    const pathList = href.href.split('/');
+    const asList = pathname.split('/');
+    const regex = /\[(.*?)\]/gm;
+    const obj = {};
+
+    for (let i = 0; i < pathList.length; i++) {
+      const match = regex.exec(pathList[i]);
+
+      if (match !== null) {
+        const key = match[1];
+        const val = asList[i];
+        obj[key] = val;
+        href.query[key] = val;
+        regex.lastIndex = 0;
+      }
+    }
+
+    const str = queryLength > 0 ? '&' : '?';
+    return `${href.href}${str}${stringify(obj)}`;
+  } else {
+    return href;
+  }
 };
 
 export const lngPathCorrector = (config, currentRoute, currentLanguage) => {
@@ -79,11 +106,14 @@ export const lngPathCorrector = (config, currentRoute, currentLanguage) => {
     const pathname = typeof parsedAs.pathname === "string" && parsedAs.pathname.length > 0 ? parsedAs.pathname.replace(/\/$/, '') : '/';
     const search = typeof parsedAs.search === "string" ? parsedAs.search : '';
     const hash = typeof parsedAs.hash === "string" ? parsedAs.hash : '';
-    as = `${pathname}/${subpath}${search}${hash}`;
-    const query = href.query; // @TODO I have to change pathname due to the unfixed error https://github.com/isaachinman/next-i18next/issues/413
+    as = `${pathname}/${subpath}${search}${hash}`; // @TODO I have to change pathname due to the unfixed error https://github.com/isaachinman/next-i18next/issues/413
 
-    if (!query.id && originalAs) {
-      href.pathname = href.pathname.replace(/\/$/, '').concat("/[subpath]");
+    const query = href.query;
+    const queryLength = Object.keys(query).length;
+
+    if (originalAs) {
+      const newHref = getHref(pathname, href, queryLength);
+      href.href = newHref;
     }
 
     href.query.lng = currentLanguage;
