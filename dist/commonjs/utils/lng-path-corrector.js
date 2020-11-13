@@ -143,9 +143,12 @@ var lngPathCorrector = function lngPathCorrector(config, currentRoute, currentLa
 
     var query = href.query;
     var queryLength = Object.keys(query).length;
+    href.pathname = href.pathname.replace(/\/$/, '').concat("/[subpath]");
+    href.path = href.path.replace(/\/$/, '').concat("/[subpath]");
+    href.href = href.href.replace(/\/$/, '').concat("/[subpath]");
 
     if (originalAs) {
-      var newHref = getHref(pathname, href, queryLength);
+      var newHref = getHref("".concat(pathname, "/").concat(subpath), href, queryLength);
       href.href = newHref;
     }
 
