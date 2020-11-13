@@ -102,8 +102,14 @@ export const lngPathCorrector = (config: Config, currentRoute, currentLanguage) 
     // @TODO I have to change pathname due to the unfixed error https://github.com/isaachinman/next-i18next/issues/413
     const query = href.query
     const queryLength = Object.keys(query).length
+
+
+    href.pathname = href.pathname.replace(/\/$/, '').concat("/[subpath]")
+    href.path = href.path.replace(/\/$/, '').concat("/[subpath]")
+    href.href = href.href.replace(/\/$/, '').concat("/[subpath]")
+
     if (originalAs) {
-      const newHref = getHref(pathname, href, queryLength)
+      const newHref = getHref(`${pathname}/${subpath}`, href, queryLength)
       href.href = newHref
     }
     href.query.lng = currentLanguage
