@@ -23,6 +23,10 @@ require("core-js/modules/es7.object.values");
 
 require("core-js/modules/es6.string.starts-with");
 
+require("core-js/modules/es7.array.includes");
+
+require("core-js/modules/es6.string.includes");
+
 require("core-js/modules/es6.array.is-array");
 
 var _i18nextExpressMiddleware = _interopRequireDefault(require("i18next-express-middleware"));
@@ -42,6 +46,10 @@ function _default(nexti18next) {
 
   var isI18nRoute = function isI18nRoute(req) {
     return ignoreRoutes.every(function (x) {
+      if (req.url.includes('.')) {
+        return false;
+      }
+
       return !req.url.startsWith(x);
     });
   };
