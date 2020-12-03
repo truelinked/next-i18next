@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import i18nextMiddleware from 'i18next-express-middleware'
 import pathMatch from 'path-match'
+import { parse } from 'url'
 
 import {
   addSubpath,
@@ -19,7 +20,9 @@ export default function (nexti18next) {
   const { allLanguages, ignoreRoutes, localeSubpaths } = config
 
   const isI18nRoute = (req: Request) => ignoreRoutes.every(x => {
-    if(req.url.includes('.')) {
+    const parsedURL = parse(req.url);
+    const pathname = parsedURL.pathname;
+    if(pathname.includes('.')) {
       return false;
     }
     return !req.url.startsWith(x)

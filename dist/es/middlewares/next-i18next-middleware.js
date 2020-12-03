@@ -1,5 +1,6 @@
 import i18nextMiddleware from 'i18next-express-middleware';
 import pathMatch from 'path-match';
+import { parse } from 'url';
 import { addSubpath, lngFromReq, redirectWithoutCache, removeSubpath, subpathFromLng, subpathIsPresent, subpathIsRequired } from '../utils';
 const route = pathMatch();
 export default function (nexti18next) {
@@ -14,7 +15,10 @@ export default function (nexti18next) {
   } = config;
 
   const isI18nRoute = req => ignoreRoutes.every(x => {
-    if (req.url.includes('.')) {
+    const parsedURL = parse(req.url);
+    const pathname = parsedURL.pathname;
+
+    if (pathname.includes('.')) {
       return false;
     }
 

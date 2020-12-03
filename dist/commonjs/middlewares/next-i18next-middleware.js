@@ -33,6 +33,8 @@ var _i18nextExpressMiddleware = _interopRequireDefault(require("i18next-express-
 
 var _pathMatch = _interopRequireDefault(require("path-match"));
 
+var _url = require("url");
+
 var _utils = require("../utils");
 
 var route = (0, _pathMatch["default"])();
@@ -46,7 +48,10 @@ function _default(nexti18next) {
 
   var isI18nRoute = function isI18nRoute(req) {
     return ignoreRoutes.every(function (x) {
-      if (req.url.includes('.')) {
+      var parsedURL = (0, _url.parse)(req.url);
+      var pathname = parsedURL.pathname;
+
+      if (pathname.includes('.')) {
         return false;
       }
 
